@@ -75,16 +75,6 @@ resource "aws_iam_role_policy" "github-actions-driver-ecs-deploy-policy" {
   })
 }
 
-// References to current ecs task role provisioned by capstone-infrastructure module
-data "aws_iam_role" "capstone-ecs-task-role" {
-  name = "capstone-ecs-task-role"
-}
-
-// References to current ecs task execution role provisioned by capstone-infrastructure module
-data "aws_iam_role" "capstone-ecs-task-execution-role" {
-  name = "capstone-ecs-task-execution-role"
-}
-
 //Explicitly the least-privilege from GitHub on ECS task definition policy
 resource "aws_iam_role_policy" "github-actions-driver-ecs-task-definition-policy" {
   name = "github-actions-driver-ecs-task-definition-policy"
