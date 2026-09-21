@@ -1,6 +1,6 @@
-// Configuring an IAM role for the trusted GitHub bff-client repo subject
-resource "aws_iam_role" "github-actions-bff-deployment-role" {
-  name = "github-actions-bff-deployment-role"
+// Configuring an IAM role for trusted github driver service repo subject
+resource "aws_iam_role" "github-actions-driver-deployment-role" {
+  name = "github-actions-driver-deployment-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -13,7 +13,7 @@ resource "aws_iam_role" "github-actions-bff-deployment-role" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-            "token.actions.githubusercontent.com:sub" = "repo:anhvt13@42229955/capstone-bff-client@1374533695:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub" = "repo:anhvt13@42229955/capstone-driver-service@1375324951:ref:refs/heads/main"
           }
         }
       }
@@ -21,10 +21,10 @@ resource "aws_iam_role" "github-actions-bff-deployment-role" {
   })
 }
 
-// Explicitly the least-privilege from GitHub on ECR push image policy on bff-client repository
-resource "aws_iam_role_policy" "github-actions-bff-ecr-push-policy" {
-  name = "github-actions-bff-ecr-push-policy"
-  role = aws_iam_role.github-actions-bff-deployment-role.id
+// Explicitly the least-privilege ECR push image policy on driver-service repository
+resource "aws_iam_role_policy" "github-actions-driver-ecr-push-policy" {
+  name = "github-actions-driver-ecr-push-policy"
+  role = aws_iam_role.github-actions-driver-deployment-role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -47,16 +47,16 @@ resource "aws_iam_role_policy" "github-actions-bff-ecr-push-policy" {
           "ecr:UploadLayerPart",
           "ecr:BatchGetImage"
         ]
-        Resource = "arn:aws:ecr:ap-southeast-1:249899229305:repository/capstone/bff-client"
+        Resource = "arn:aws:ecr:ap-southeast-1:249899229305:repository/capstone/driver-service"
       }
     ]
   })
 }
 
-// Explicitly the least-privilege from GitHub on ECS deployment permissions for bff-client
-resource "aws_iam_role_policy" "github-actions-bff-ecs-deploy-policy" {
-  name = "github-actions-bff-ecs-deploy-policy"
-  role = aws_iam_role.github-actions-bff-deployment-role.id
+// Explicitly the least-privilege ECS deployment permissions for driver-service
+resource "aws_iam_role_policy" "github-actions-driver-ecs-deploy-policy" {
+  name = "github-actions-driver-ecs-deploy-policy"
+  role = aws_iam_role.github-actions-driver-deployment-role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -68,7 +68,7 @@ resource "aws_iam_role_policy" "github-actions-bff-ecs-deploy-policy" {
           "ecs:DescribeServices"
         ]
         Resource = [
-          "arn:aws:ecs:ap-southeast-1:249899229305:service/capstone-ecs-cluster/bff-client"
+          "arn:aws:ecs:ap-southeast-1:249899229305:service/capstone-ecs-cluster/driver-service"
         ]
       }
     ]
@@ -76,9 +76,9 @@ resource "aws_iam_role_policy" "github-actions-bff-ecs-deploy-policy" {
 }
 
 //Explicitly the least-privilege from GitHub on ECS task definition policy
-resource "aws_iam_role_policy" "github-actions-bff-ecs-task-definition-policy" {
-  name = "github-actions-bff-ecs-task-definition-policy"
-  role = aws_iam_role.github-actions-bff-deployment-role.id
+resource "aws_iam_role_policy" "github-actions-driver-ecs-task-definition-policy" {
+  name = "github-actions-driver-ecs-task-definition-policy"
+  role = aws_iam_role.github-actions-driver-deployment-role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -112,5 +112,3 @@ resource "aws_iam_role_policy" "github-actions-bff-ecs-task-definition-policy" {
     ]
   })
 }
-
-
