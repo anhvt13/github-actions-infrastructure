@@ -13,9 +13,7 @@ resource "aws_iam_role" "github-actions-driver-deployment-role" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-          }
-          StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:anhvt13@42229955/capstone-driver-service@1375324951"
+            "token.actions.githubusercontent.com:sub" = "repo:anhvt13@42229955/capstone-driver-service@1375324951:ref:refs/heads/main"
           }
         }
       }
@@ -46,7 +44,8 @@ resource "aws_iam_role_policy" "github-actions-driver-ecr-push-policy" {
           "ecr:CompleteLayerUpload",
           "ecr:InitiateLayerUpload",
           "ecr:PutImage",
-          "ecr:UploadLayerPart"
+          "ecr:UploadLayerPart",
+          "ecr:BatchGetImage"
         ]
         Resource = "arn:aws:ecr:ap-southeast-1:249899229305:repository/capstone/driver-service"
       }
@@ -65,7 +64,8 @@ resource "aws_iam_role_policy" "github-actions-driver-ecs-deploy-policy" {
         Sid    = "EcsDeployment"
         Effect = "Allow"
         Action = [
-          "ecs:UpdateService"
+          "ecs:UpdateService",
+          "ecs:DescribeServices"
         ]
         Resource = [
           "arn:aws:ecs:ap-southeast-1:249899229305:service/capstone-ecs-cluster/driver-service"
