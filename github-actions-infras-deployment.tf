@@ -26,9 +26,9 @@ resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
   })
 }
 
-// Least privilege policies for deploy project's infrastructure by terraform
-resource "aws_iam_role_policy" "github_actions_capstone_infrastructure_policy" {
-  name = "github_actions_capstone_infrastructure_policy"
+// Explicit Least privilege policies for deploy project's infrastructure by terraform
+resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
+  name = "github-actions-capstone-infrastructure-policy"
   role = aws_iam_role.github-actions-infrastructure-deployment-role.id
   policy = jsonencode({
     Version = "2012-10-17"
@@ -350,7 +350,11 @@ resource "aws_iam_role_policy" "github_actions_capstone_infrastructure_policy" {
           "secretsmanager:TagResource",
           "secretsmanager:UntagResource"
         ]
-        Resource = "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/*"
+        Resource = [
+          "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/bff/tls",
+          "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/driver/tls",
+          "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/bff/oauth2"
+        ]
       },
 
       # ============================================================
