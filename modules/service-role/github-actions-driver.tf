@@ -98,17 +98,17 @@ resource "aws_iam_role_policy" "github-actions-driver-ecs-task-definition-policy
         ]
         Resource = "*"
       },
-      {
-        Sid    = "PassRolesInTaskDefinition"
-        Effect = "Allow"
-        Action = [
-          "iam:PassRole"
-        ]
-        Resource = [
-          data.aws_iam_role.capstone-ecs-task-role.arn,
-          data.aws_iam_role.capstone-ecs-task-execution-role.arn
-        ]
-      }
+      # {
+      #   Sid    = "PassRolesInTaskDefinition"
+      #   Effect = "Allow"
+      #   Action = [
+      #     "iam:PassRole"
+      #   ]
+      #   Resource = [
+      #     data.aws_iam_role.capstone-ecs-task-role.arn,
+      #     data.aws_iam_role.capstone-ecs-task-execution-role.arn
+      #   ]
+      # }
     ]
   })
 }

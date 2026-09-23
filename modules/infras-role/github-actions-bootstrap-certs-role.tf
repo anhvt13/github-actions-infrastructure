@@ -13,7 +13,12 @@ resource "aws_iam_role" "github-actions-bootstrap-certs-role" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-            "token.actions.githubusercontent.com:sub" = "repo:anhvt13@42229955/capstone-infrastructure@1375700110:ref:refs/heads/main",
+          }
+          StringLike = {
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:ref:refs/heads/main",
+              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:environment:prod"
+            ]
           }
         }
       }
@@ -21,16 +26,15 @@ resource "aws_iam_role" "github-actions-bootstrap-certs-role" {
   })
 }
 
-// Explicit Least privilege policies for bootstrap TLS certificates
+// Explicit least privilege policies for bootstrap TLS certificates
 resource "aws_iam_role_policy" "github-actions-bootstrap-certs-policy" {
   name = "github-actions-bootstrap-certs-policy"
   role = aws_iam_role.github-actions-bootstrap-certs-role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-
       # ========================
-      # Secrets Manager
+      # Least privilege on Capstone secrets value
       # ========================
       {
         Sid    = "SecretsManager"

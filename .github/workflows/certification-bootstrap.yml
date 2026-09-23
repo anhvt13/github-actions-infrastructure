@@ -3,6 +3,8 @@ name: Bootstrap Capstone application Secrets Workflow
 on:
   # Only allows manually start this GitHub Actions workflow
   workflow_dispatch:
+    branches:
+      - main
 
 permissions:
   id-token: write
@@ -15,6 +17,8 @@ jobs:
   bootstrap-secrets:
     name: Bootstrap Capstone application Secrets
     runs-on: ubuntu-latest
+    environment:
+      name: prod
 
     steps:
       - name: Configure AWS credentials
