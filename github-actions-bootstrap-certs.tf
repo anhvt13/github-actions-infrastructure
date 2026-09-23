@@ -21,16 +21,15 @@ resource "aws_iam_role" "github-actions-bootstrap-certs-role" {
   })
 }
 
-// Explicit Least privilege policies for bootstrap TLS certificates
+// Explicit least privilege policies for bootstrap TLS certificates
 resource "aws_iam_role_policy" "github-actions-bootstrap-certs-policy" {
   name = "github-actions-bootstrap-certs-policy"
   role = aws_iam_role.github-actions-bootstrap-certs-role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-
       # ========================
-      # Secrets Manager
+      # Least privilege on Capstone secrets value
       # ========================
       {
         Sid    = "SecretsManager"

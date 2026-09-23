@@ -428,6 +428,37 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "ssm:GetParameter"
         ]
         Resource = "arn:aws:ssm:ap-southeast-1::parameter/aws/service/ami-amazon-linux-latest/*"
+      },
+
+      # ============================================================
+      # S3 - Terraform state bucket
+      # ============================================================
+      {
+        Sid    = "TerraformStateBucket"
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket"
+        ]
+        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an"
+      },
+      {
+        Sid    = "TerraformStateObject"
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject"
+        ]
+        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/terraform.tfstate"
+      },
+      {
+        Sid    = "TerraformStateLock"
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ]
+        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/terraform.tfstate.tflock"
       }
     ]
   })
