@@ -17,8 +17,7 @@ resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
           StringLike = {
             "token.actions.githubusercontent.com:sub" = [
               "repo:anhvt13@42229955/capstone-infrastructure@1375700110:ref:refs/heads/main",
-              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:environment:prod",
-              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:pull_request"
+              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:environment:prod"
             ]
           }
         }

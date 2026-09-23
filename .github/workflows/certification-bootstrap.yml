@@ -17,6 +17,8 @@ jobs:
   bootstrap-secrets:
     name: Bootstrap Capstone application Secrets
     runs-on: ubuntu-latest
+    environment:
+      name: prod
 
     steps:
       - name: Configure AWS credentials

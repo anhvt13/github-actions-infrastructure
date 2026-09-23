@@ -13,7 +13,12 @@ resource "aws_iam_role" "github-actions-bootstrap-certs-role" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-            "token.actions.githubusercontent.com:sub" = "repo:anhvt13@42229955/capstone-infrastructure@1375700110:ref:refs/heads/main",
+          }
+          StringLike = {
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:ref:refs/heads/main",
+              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:environment:prod"
+            ]
           }
         }
       }
