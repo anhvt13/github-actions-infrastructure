@@ -150,7 +150,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "iam:ListRolePolicies",
           "iam:TagRole",
           "iam:UntagRole",
-          "iam:CreateInstanceProfile"
+          "iam:CreateInstanceProfile",
+          "iam:ListInstanceProfilesForRole"
         ]
         Resource = [
           "arn:aws:iam::249899229305:role/capstone-bastion-ssm-instant-role",
@@ -170,7 +171,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "iam:TagInstanceProfile",
           "iam:GetInstanceProfile",
           "iam:DeleteInstanceProfile",
-          "iam:AddRoleToInstanceProfile"
+          "iam:AddRoleToInstanceProfile",
+          "iam:RemoveRoleFromInstanceProfile"
         ]
         Resource = [
           "arn:aws:iam::249899229305:instance-profile/capstone-bastion-instance-profile"
