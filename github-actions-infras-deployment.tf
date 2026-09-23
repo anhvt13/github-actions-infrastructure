@@ -46,7 +46,6 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "ec2:AssociateAddress",
           "ec2:AttachInternetGateway",
           "ec2:AssociateRouteTable",
-
           "ec2:CreateEgressOnlyInternetGateway",
           "ec2:CreateInternetGateway",
           "ec2:CreateNatGateway",
@@ -59,7 +58,6 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "ec2:CreateTags",
           "ec2:CreateVpc",
           "ec2:CreateVpcEndpoint",
-
           "ec2:DeleteEgressOnlyInternetGateway",
           "ec2:DeleteInternetGateway",
           "ec2:DeleteNatGateway",
@@ -71,7 +69,6 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "ec2:DeleteSubnet",
           "ec2:DeleteVpc",
           "ec2:DeleteVpcEndpoints",
-
           "ec2:DescribeAccountAttributes",
           "ec2:DescribeAddresses",
           "ec2:DescribeAvailabilityZones",
@@ -94,25 +91,23 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "ec2:DescribeVpcs",
           "ec2:DescribeAddressesAttribute",
           "ec2:DisassociateAddress",
-
           "ec2:ModifyInstanceAttribute",
           "ec2:ModifyNetworkInterfaceAttribute",
           "ec2:ModifySubnetAttribute",
           "ec2:ModifyVpcAttribute",
           "ec2:ModifyVpcEndpoint",
-
           "ec2:ReleaseAddress",
-
           "ec2:ReplaceNetworkAclAssociation",
           "ec2:ReplaceNetworkAclEntry",
           "ec2:ReplaceRoute",
-
           "ec2:RevokeSecurityGroupEgress",
           "ec2:RevokeSecurityGroupIngress",
-
           "ec2:AuthorizeSecurityGroupEgress",
-          "ec2:AuthorizeSecurityGroupIngress"
-
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:DisassociateRouteTable",
+          "ec2:DetachInternetGateway",
+          "ec2:DescribeInstanceTypes",
+          "ec2:DescribeInstanceCreditSpecifications"
         ]
         Resource = "*"
       },
@@ -154,12 +149,31 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "iam:ListAttachedRolePolicies",
           "iam:ListRolePolicies",
           "iam:TagRole",
-          "iam:UntagRole"
+          "iam:UntagRole",
+          "iam:CreateInstanceProfile"
         ]
         Resource = [
           "arn:aws:iam::249899229305:role/capstone-bastion-ssm-instant-role",
           "arn:aws:iam::249899229305:role/capstone-ecs-task-role",
           "arn:aws:iam::249899229305:role/capstone-ecs-task-execution-role"
+        ]
+      },
+
+      # ============================================================
+      # Manage Instance Profile
+      # ============================================================
+      {
+        Sid    = "ManageCapstoneInstanceProfile"
+        Effect = "Allow"
+        Action = [
+          "iam:CreateInstanceProfile",
+          "iam:TagInstanceProfile",
+          "iam:GetInstanceProfile",
+          "iam:DeleteInstanceProfile",
+          "iam:AddRoleToInstanceProfile"
+        ]
+        Resource = [
+          "arn:aws:iam::249899229305:instance-profile/capstone-bastion-instance-profile"
         ]
       },
 
@@ -200,7 +214,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
         Resource = [
           "arn:aws:iam::249899229305:role/capstone-bastion-ssm-role",
           "arn:aws:iam::249899229305:role/capstone-ecs-task-role",
-          "arn:aws:iam::249899229305:role/capstone-ecs-task-execution-role"
+          "arn:aws:iam::249899229305:role/capstone-ecs-task-execution-role",
+          "arn:aws:iam::249899229305:role/capstone-bastion-ssm-instant-role"
         ]
       },
 
@@ -213,22 +228,17 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
         Action = [
           "ecs:CreateCluster",
           "ecs:DeleteCluster",
-
           "ecs:DescribeClusters",
           "ecs:DescribeServices",
           "ecs:DescribeTaskDefinition",
-
           "ecs:CreateService",
           "ecs:DeleteService",
           "ecs:UpdateService",
-
           "ecs:RegisterTaskDefinition",
           "ecs:DeregisterTaskDefinition",
-
           "ecs:TagResource",
           "ecs:UntagResource",
           "ecs:ListTagsForResource",
-
           "ecs:PutClusterCapacityProviders",
           "ecs:UpdateCluster"
         ]
@@ -248,7 +258,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "servicediscovery:GetOperation",
           "servicediscovery:ListNamespaces",
           "servicediscovery:TagResource",
-          "servicediscovery:UntagResource"
+          "servicediscovery:UntagResource",
+          "servicediscovery:ListTagsForResource"
         ]
         Resource = "*"
       },
@@ -263,24 +274,18 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "elasticloadbalancing:AddTags",
           "elasticloadbalancing:RemoveTags",
           "elasticache:AddTagsToResource",
-
           "elasticloadbalancing:CreateLoadBalancer",
           "elasticloadbalancing:DeleteLoadBalancer",
-
           "elasticloadbalancing:CreateTargetGroup",
           "elasticloadbalancing:DeleteTargetGroup",
-
           "elasticloadbalancing:CreateListener",
           "elasticloadbalancing:DeleteListener",
-
           "elasticloadbalancing:CreateRule",
           "elasticloadbalancing:DeleteRule",
-
           "elasticloadbalancing:ModifyListener",
           "elasticloadbalancing:ModifyRule",
           "elasticloadbalancing:ModifyTargetGroup",
           "elasticloadbalancing:ModifyTargetGroupAttributes",
-
           "elasticloadbalancing:DescribeLoadBalancers",
           "elasticloadbalancing:DescribeListeners",
           "elasticloadbalancing:DescribeRules",
@@ -288,9 +293,11 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "elasticloadbalancing:DescribeTargetHealth",
           "elasticloadbalancing:DescribeLoadBalancerAttributes",
           "elasticloadbalancing:DescribeTargetGroupAttributes",
-
           "elasticloadbalancing:SetSecurityGroups",
           "elasticloadbalancing:SetSubnets",
+          "elasticloadbalancing:DescribeTags",
+          "elasticloadbalancing:ModifyLoadBalancerAttributes",
+          "elasticloadbalancing:DescribeListenerAttributes"
 
         ]
         Resource = "*"
@@ -305,22 +312,20 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
         Action = [
           "rds:AddTagsToResource",
           "rds:RemoveTagsFromResource",
-
           "rds:CreateDBCluster",
           "rds:DeleteDBCluster",
           "rds:DescribeDBClusters",
           "rds:ModifyDBCluster",
-
           "rds:CreateDBInstance",
           "rds:DeleteDBInstance",
           "rds:DescribeDBInstances",
           "rds:ModifyDBInstance",
-
           "rds:CreateDBSubnetGroup",
           "rds:DeleteDBSubnetGroup",
           "rds:DescribeDBSubnetGroups",
           "rds:ModifyDBSubnetGroup",
-          "rds:ListTagsForResource"
+          "rds:ListTagsForResource",
+          "rds:DescribeGlobalClusters"
         ]
         Resource = "*"
       },
@@ -337,13 +342,14 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "elasticache:DescribeServerlessCaches",
           "elasticache:ModifyServerlessCache",
           "elasticache:TagResource",
-          "elasticache:UntagResource"
+          "elasticache:UntagResource",
+          "elasticache:ListTagsForResource"
         ]
         Resource = "*"
       },
 
       # ============================================================
-      # Secrets Manager
+      # Secrets Manager for application
       # ============================================================
       {
         Sid    = "SecretsManager"
@@ -367,6 +373,28 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
       },
 
       # ============================================================
+      # Secrets Manager for RDS
+      # ============================================================
+      {
+        Sid    = "RdsManagedMasterPassword"
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:CreateSecret",
+          "secretsmanager:TagResource"
+        ]
+        Resource = "*"
+      },
+
+      {
+        Sid    = "RdsManagedMasterPasswordKms"
+        Effect = "Allow"
+        Action = [
+          "kms:DescribeKey"
+        ]
+        Resource = "*"
+      },
+
+      # ============================================================
       # CloudWatch Logs
       # ============================================================
       {
@@ -375,17 +403,25 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
         Action = [
           "logs:CreateLogGroup",
           "logs:DeleteLogGroup",
-          "logs:DescribeLogGroups",
           "logs:PutRetentionPolicy",
           "logs:DeleteRetentionPolicy",
           "logs:TagResource",
           "logs:UntagResource",
-          "logs:ListTagsForResource",
-          "logs:DescribeLogGroups"
+          "logs:ListTagsForResource"
         ]
         Resource = [
-          "arn:aws:logs:ap-southeast-1:249899229305:log-group::log-stream"
+          "arn:aws:logs:ap-southeast-1:249899229305:log-group::log-stream",
+          "arn:aws:logs:ap-southeast-1:249899229305:log-group:/ecs/capstone-app"
         ]
+      },
+
+      {
+        Sid    = "CloudWatchLogsDescribe"
+        Effect = "Allow"
+        Action = [
+          "logs:DescribeLogGroups"
+        ]
+        Resource = "*"
       },
 
       # ============================================================
@@ -401,18 +437,24 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "s3:GetBucketPolicy",
           "s3:PutBucketPolicy",
           "s3:DeleteBucketPolicy",
-
           "s3:GetBucketPublicAccessBlock",
           "s3:PutBucketPublicAccessBlock",
-
           "s3:GetBucketVersioning",
           "s3:PutBucketVersioning",
-
           "s3:GetEncryptionConfiguration",
           "s3:PutEncryptionConfiguration",
-
           "s3:ListBucket",
-          "s3:GetBucketTagging"
+          "s3:GetBucketTagging",
+          "s3:GetBucketAcl",
+          "s3:GetBucketCORS",
+          "s3:GetBucketWebsite",
+          "s3:GetAccelerateConfiguration",
+          "s3:GetBucketRequestPayment",
+          "s3:GetBucketLogging",
+          "s3:GetLifecycleConfiguration",
+          "s3:GetReplicationConfiguration",
+          "s3:GetBucketObjectLockConfiguration",
+          "s3:PutBucketTagging"
         ]
         Resource = "arn:aws:s3:::capstone-db-schema-bucket-249899229305-*"
       },
@@ -459,6 +501,18 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "s3:DeleteObject"
         ]
         Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/terraform.tfstate.tflock"
+      },
+
+      # ============================================================
+      # Route53 - ECS service connection
+      # ============================================================
+      {
+        Sid    = "Route53"
+        Effect = "Allow"
+        Action = [
+          "route53:CreateHostedZone"
+        ]
+        Resource = "*"
       }
     ]
   })
