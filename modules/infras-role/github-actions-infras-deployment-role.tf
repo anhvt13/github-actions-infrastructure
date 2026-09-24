@@ -1,11 +1,3 @@
-//TODO Register Github action as an OIDC connect provider with aws STS
-resource "aws_iam_openid_connect_provider" "github-actions-oidc" {
-  url = "https://token.actions.githubusercontent.com"
-  client_id_list = [
-    "sts.amazonaws.com"
-  ]
-}
-
 //TODO Configuring an IAM role for infrastructure deployment with trusted "capstone-infrastructure" repository assuming
 resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
   name = "github-actions-infrastructure-deployment-role"
@@ -15,7 +7,7 @@ resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
       {
         Effect = "Allow"
         Principal = {
-          Federated = aws_iam_openid_connect_provider.github-actions-oidc.arn
+          Federated = "arn:aws:iam::249899229305:oidc-provider/token.actions.githubusercontent.com"
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
