@@ -1,5 +1,5 @@
 //TODO - Run manually one time outside the Github action - avoid loop trust boundary depends
-// Configuring an IAM role for trusted github-actions-infrastructure repository assuming
+// Configuring an IAM role for bootstrap secret with trusted "github-actions-infrastructure" repository assuming
 resource "aws_iam_role" "github-actions-bootstrap-secret-role" {
   name = "github-actions-bootstrap-secret-role"
   assume_role_policy = jsonencode({
@@ -27,15 +27,15 @@ resource "aws_iam_role" "github-actions-bootstrap-secret-role" {
   })
 }
 
-// Explicit least privilege policies for bootstrap TLS certificates
-resource "aws_iam_role_policy" "github-actions-bootstrap-certs-policy" {
-  name = "github-actions-bootstrap-certs-policy"
+// Explicit least privilege policies on bootstrap secret role policy
+resource "aws_iam_role_policy" "github-actions-bootstrap-secret-policy" {
+  name = "github-actions-bootstrap-secret-policy"
   role = aws_iam_role.github-actions-bootstrap-secret-role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       # ========================
-      # Least privilege on Capstone secrets value
+      # Least privilege on Secret Manager resources
       # ========================
       {
         Sid    = "SecretsManager"
@@ -48,6 +48,37 @@ resource "aws_iam_role_policy" "github-actions-bootstrap-certs-policy" {
           "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/driver/tls",
           "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/bff/oauth2"
         ]
+      },
+
+      # ============================================================
+      # S3 - Terraform OIDC state bucket
+      # ============================================================
+      {
+        Sid    = "TerraformStateBucket"
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket"
+        ]
+        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an"
+      },
+      {
+        Sid    = "TerraformStateObject"
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject"
+        ]
+        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/oidc/terraform.tfstate"
+      },
+      {
+        Sid    = "TerraformStateLock"
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ]
+        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/oidc/terraform.tfstate.tflock"
       }
     ]
   })
