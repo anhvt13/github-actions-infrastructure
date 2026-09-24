@@ -17,7 +17,7 @@ env:
 
 # OIDC Infrastructure Deployment Role Initial Job
 jobs:
-  init-infras-deployment-role:
+  init-infra-deployment-role:
     name: Initialize OIDC Infrastructure Deployment Role Workflow
     runs-on: ubuntu-latest
     environment:

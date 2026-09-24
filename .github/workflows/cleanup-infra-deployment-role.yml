@@ -1,4 +1,4 @@
-name: Cleanup OIDC Infrastructure Deployment Role Workflow
+name: Clean up OIDC Infrastructure Deployment Role Workflow
 
 on:
   workflow_dispatch:
@@ -15,8 +15,8 @@ env:
 
 # OIDC Infrastructure Deployment Role Cleanup Job
 jobs:
-  clean-up-infras-deployment-role:
-    name: Cleanup OIDC Infrastructure Deployment Role Workflow
+  clean-up-infra-deployment-role:
+    name: Clean up OIDC Infrastructure Deployment Role Workflow
     runs-on: ubuntu-latest
     environment:
       name: prod

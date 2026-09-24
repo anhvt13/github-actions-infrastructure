@@ -1,3 +1,11 @@
+//TODO Register Github action as an OIDC connect provider with aws STS
+resource "aws_iam_openid_connect_provider" "github-actions" {
+  url = "https://token.actions.githubusercontent.com"
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+}
+
 //TODO Reference to Github OIDC provider ARN
 data "terraform_remote_state" "oidc" {
   backend = "s3"
@@ -17,7 +25,7 @@ resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
       {
         Effect = "Allow"
         Principal = {
-          Federated = data.terraform_remote_state.oidc.outputs.github_oidc_provider_arn
+          Federated = aws_iam_openid_connect_provider.github-actions.arn
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {

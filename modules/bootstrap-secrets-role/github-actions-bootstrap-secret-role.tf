@@ -1,4 +1,13 @@
-//TODO - Run manually one time outside the Github action - avoid loop trust boundary depends
+//TODO Register Github action as an OIDC connect provider with aws STS
+resource "aws_iam_openid_connect_provider" "github-actions" {
+  url = "https://token.actions.githubusercontent.com"
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+}
+
+
+//TODO - Run manually one time outside the Github action, avoid looping on trust boundary dependency
 // Configuring an IAM role for bootstrap secret with trusted "github-actions-infrastructure" repository assuming
 resource "aws_iam_role" "github-actions-bootstrap-secret-role" {
   name = "github-actions-bootstrap-secret-role"
