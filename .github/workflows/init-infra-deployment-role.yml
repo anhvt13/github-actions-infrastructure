@@ -1,5 +1,5 @@
-# Upstream dependency: IAM role "github-actions-bootstrap-secret-role" was manually created successful
-name: Initialize OIDC Infrastructure Deployment Role Workflow
+# Upstream dependency: IAM role "github-actions-bootstrap-role" was manually created successful
+name: Initialize OIDC Infrastructure Deployment Role
 
 on:
   # Only allows manually start this GitHub Actions workflow
@@ -18,7 +18,7 @@ env:
 # OIDC Infrastructure Deployment Role Initial Job
 jobs:
   init-infra-deployment-role:
-    name: Initialize OIDC Infrastructure Deployment Role Workflow
+    name: Initialize OIDC Infrastructure Deployment Role
     runs-on: ubuntu-latest
     environment:
       name: prod
@@ -30,7 +30,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: arn:aws:iam::249899229305:role/github-actions-bootstrap-secret-role
+          role-to-assume: arn:aws:iam::249899229305:role/github-actions-bootstrap-role
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Verify AWS identity

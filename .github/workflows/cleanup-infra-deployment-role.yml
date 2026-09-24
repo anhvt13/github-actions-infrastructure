@@ -1,4 +1,4 @@
-name: Clean up OIDC Infrastructure Deployment Role Workflow
+name: Clean up OIDC Infrastructure Deployment Role
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ env:
 # OIDC Infrastructure Deployment Role Cleanup Job
 jobs:
   clean-up-infra-deployment-role:
-    name: Clean up OIDC Infrastructure Deployment Role Workflow
+    name: Clean up OIDC Infrastructure Deployment Role
     runs-on: ubuntu-latest
     environment:
       name: prod
@@ -28,7 +28,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: arn:aws:iam::249899229305:role/github-actions-bootstrap-secret-role
+          role-to-assume: arn:aws:iam::249899229305:role/github-actions-bootstrap-role
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Verify AWS identity
