@@ -1,4 +1,12 @@
-// Configuring an IAM role for the trusted GitHub bff-client repo subject
+//TODO-Register Github action as an OIDC connect provider with aws STS
+resource "aws_iam_openid_connect_provider" "github-actions" {
+  url = "https://token.actions.githubusercontent.com"
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+}
+
+//TODO-Configuring an IAM role for bff service deployment with trusted "capstone-bff-client" repository assuming
 resource "aws_iam_role" "github-actions-bff-deployment-role" {
   name = "github-actions-bff-deployment-role"
   assume_role_policy = jsonencode({
@@ -7,7 +15,7 @@ resource "aws_iam_role" "github-actions-bff-deployment-role" {
       {
         Effect = "Allow"
         Principal = {
-          Federated = data.aws_iam_openid_connect_provider.github-actions.arn
+          Federated = aws_iam_openid_connect_provider.github-actions.arn
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
@@ -21,7 +29,7 @@ resource "aws_iam_role" "github-actions-bff-deployment-role" {
   })
 }
 
-// Explicitly the least-privilege from GitHub on ECR push image policy on bff-client repository
+//TODO-Explicitly least-privilege on ECR push image permission
 resource "aws_iam_role_policy" "github-actions-bff-ecr-push-policy" {
   name = "github-actions-bff-ecr-push-policy"
   role = aws_iam_role.github-actions-bff-deployment-role.id
@@ -53,7 +61,7 @@ resource "aws_iam_role_policy" "github-actions-bff-ecr-push-policy" {
   })
 }
 
-// Explicitly the least-privilege from GitHub on ECS deployment permissions for bff-client
+//TODO-Explicitly least-privilege on ECS deployment permission
 resource "aws_iam_role_policy" "github-actions-bff-ecs-deploy-policy" {
   name = "github-actions-bff-ecs-deploy-policy"
   role = aws_iam_role.github-actions-bff-deployment-role.id
@@ -75,7 +83,7 @@ resource "aws_iam_role_policy" "github-actions-bff-ecs-deploy-policy" {
   })
 }
 
-//Explicitly the least-privilege from GitHub on ECS task definition policy
+//TODO-Explicitly least-privilege on render ECS task definition permission
 resource "aws_iam_role_policy" "github-actions-bff-ecs-task-definition-policy" {
   name = "github-actions-bff-ecs-task-definition-policy"
   role = aws_iam_role.github-actions-bff-deployment-role.id

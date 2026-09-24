@@ -1,4 +1,12 @@
-// Configuring an IAM role for trusted github driver service repo subject
+//TODO-Register Github action as an OIDC connect provider with aws STS
+resource "aws_iam_openid_connect_provider" "github-actions" {
+  url = "https://token.actions.githubusercontent.com"
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+}
+
+//TODO-Configuring an IAM role for driver service deployment with trusted "capstone-driver-service" repository assuming
 resource "aws_iam_role" "github-actions-driver-deployment-role" {
   name = "github-actions-driver-deployment-role"
   assume_role_policy = jsonencode({
@@ -21,7 +29,7 @@ resource "aws_iam_role" "github-actions-driver-deployment-role" {
   })
 }
 
-// Explicitly the least-privilege ECR push image policy on driver-service repository
+//TODO-Explicit least-privilege on ECR push image permission
 resource "aws_iam_role_policy" "github-actions-driver-ecr-push-policy" {
   name = "github-actions-driver-ecr-push-policy"
   role = aws_iam_role.github-actions-driver-deployment-role.id
@@ -53,7 +61,7 @@ resource "aws_iam_role_policy" "github-actions-driver-ecr-push-policy" {
   })
 }
 
-// Explicitly the least-privilege ECS deployment permissions for driver-service
+//TODO-Explicit least-privilege on ECS deployment permission
 resource "aws_iam_role_policy" "github-actions-driver-ecs-deploy-policy" {
   name = "github-actions-driver-ecs-deploy-policy"
   role = aws_iam_role.github-actions-driver-deployment-role.id
@@ -75,7 +83,7 @@ resource "aws_iam_role_policy" "github-actions-driver-ecs-deploy-policy" {
   })
 }
 
-//Explicitly the least-privilege from GitHub on ECS task definition policy
+//TODO-Explicit least-privilege on ECS task definition permission
 resource "aws_iam_role_policy" "github-actions-driver-ecs-task-definition-policy" {
   name = "github-actions-driver-ecs-task-definition-policy"
   role = aws_iam_role.github-actions-driver-deployment-role.id

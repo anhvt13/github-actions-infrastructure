@@ -1,4 +1,13 @@
-//TODO - Run manually one time outside the Github action - avoid loop trust boundary depends
+//TODO Register Github action as an OIDC connect provider with aws STS
+resource "aws_iam_openid_connect_provider" "github-actions" {
+  url = "https://token.actions.githubusercontent.com"
+  client_id_list = [
+    "sts.amazonaws.com"
+  ]
+}
+
+
+//TODO - Run manually one time outside the Github action, avoid looping on trust boundary dependency
 // Configuring an IAM role for bootstrap secret with trusted "github-actions-infrastructure" repository assuming
 resource "aws_iam_role" "github-actions-bootstrap-secret-role" {
   name = "github-actions-bootstrap-secret-role"
@@ -79,6 +88,44 @@ resource "aws_iam_role_policy" "github-actions-bootstrap-secret-policy" {
           "s3:DeleteObject"
         ]
         Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/oidc/terraform.tfstate.tflock"
+      },
+
+      # ============================================================
+      # IAM Manage Role
+      # ============================================================
+      {
+        Sid    = "ManageOIDCRoles"
+        Effect = "Allow"
+        Action = [
+          "iam:GetRolePolicy",
+          "iam:GetRole",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies",
+          "iam:DeleteRolePolicy",
+          "iam:ListInstanceProfilesForRole",
+          "iam:DeleteRole",
+          "iam:CreateRole",
+          "iam:PutRolePolicy"
+        ]
+        Resource = [
+          "arn:aws:iam::249899229305:role/github-actions-bootstrap-secret-role",
+          "arn:aws:iam::249899229305:role/github-actions-infrastructure-deployment-role"
+        ]
+      },
+
+      # ============================================================
+      # IAM Manage Provider
+      # ============================================================
+      {
+        Sid    = "ManageOIDCProvider"
+        Effect = "Allow"
+        Action = [
+          "iam:GetOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider"
+        ]
+        Resource = [
+          "arn:aws:iam::249899229305:oidc-provider/token.actions.githubusercontent.com"
+        ]
       }
     ]
   })
