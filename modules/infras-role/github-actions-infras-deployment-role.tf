@@ -1,19 +1,9 @@
 //TODO Register Github action as an OIDC connect provider with aws STS
-resource "aws_iam_openid_connect_provider" "github-actions" {
+resource "aws_iam_openid_connect_provider" "github-actions-oidc" {
   url = "https://token.actions.githubusercontent.com"
   client_id_list = [
     "sts.amazonaws.com"
   ]
-}
-
-//TODO Reference to Github OIDC provider ARN
-data "terraform_remote_state" "oidc" {
-  backend = "s3"
-  config = {
-    bucket = "capstone-terraform-state-249899229305-ap-southeast-1-an"
-    key    = "oidc/terraform.tfstate"
-    region = "ap-southeast-1"
-  }
 }
 
 //TODO Configuring an IAM role for infrastructure deployment with trusted "capstone-infrastructure" repository assuming
@@ -25,7 +15,7 @@ resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
       {
         Effect = "Allow"
         Principal = {
-          Federated = aws_iam_openid_connect_provider.github-actions.arn
+          Federated = aws_iam_openid_connect_provider.github-actions-oidc.arn
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
