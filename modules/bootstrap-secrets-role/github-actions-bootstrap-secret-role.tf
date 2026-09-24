@@ -79,6 +79,44 @@ resource "aws_iam_role_policy" "github-actions-bootstrap-secret-policy" {
           "s3:DeleteObject"
         ]
         Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/oidc/terraform.tfstate.tflock"
+      },
+
+      # ============================================================
+      # IAM Manage Role
+      # ============================================================
+      {
+        Sid    = "ManageOIDCRoles"
+        Effect = "Allow"
+        Action = [
+          "iam:GetRolePolicy",
+          "iam:GetRole",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies",
+          "iam:DeleteRolePolicy",
+          "iam:ListInstanceProfilesForRole",
+          "iam:DeleteRole",
+          "iam:CreateRole",
+          "iam:PutRolePolicy"
+        ]
+        Resource = [
+          "arn:aws:iam::249899229305:role/github-actions-bootstrap-secret-role",
+          "arn:aws:iam::249899229305:role/github-actions-infrastructure-deployment-role"
+        ]
+      },
+
+      # ============================================================
+      # IAM Manage Provider
+      # ============================================================
+      {
+        Sid    = "ManageOIDCProvider"
+        Effect = "Allow"
+        Action = [
+          "iam:GetOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider"
+        ]
+        Resource = [
+          "arn:aws:iam::249899229305:oidc-provider/token.actions.githubusercontent.com"
+        ]
       }
     ]
   })

@@ -15,8 +15,8 @@ env:
 
 # OIDC Infrastructure Deployment Role Cleanup Job
 jobs:
-  terraform-destroy:
-    name: Terraform Destroy
+  clean-up-infras-deployment-role:
+    name: Cleanup OIDC Infrastructure Deployment Role Workflow
     runs-on: ubuntu-latest
     environment:
       name: prod
