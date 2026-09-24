@@ -1,6 +1,7 @@
-// Configuring an IAM role for trusted Github capstone infrastructure repo
-resource "aws_iam_role" "github-actions-bootstrap-certs-role" {
-  name = "github-actions-bootstrap-certs-role"
+//TODO - Run manually one time outside the Github action - avoid loop trust boundary depends
+// Configuring an IAM role for trusted github-actions-infrastructure repository assuming
+resource "aws_iam_role" "github-actions-bootstrap-secret-role" {
+  name = "github-actions-bootstrap-secret-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -16,8 +17,8 @@ resource "aws_iam_role" "github-actions-bootstrap-certs-role" {
           }
           StringLike = {
             "token.actions.githubusercontent.com:sub" = [
-              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:ref:refs/heads/main",
-              "repo:anhvt13@42229955/capstone-infrastructure@1375700110:environment:prod"
+              "repo:anhvt13@42229955/github-actions-infrastructure@1375902132:ref:refs/heads/main",
+              "repo:anhvt13@42229955/github-actions-infrastructure@1375902132:environment:prod"
             ]
           }
         }
@@ -29,7 +30,7 @@ resource "aws_iam_role" "github-actions-bootstrap-certs-role" {
 // Explicit least privilege policies for bootstrap TLS certificates
 resource "aws_iam_role_policy" "github-actions-bootstrap-certs-policy" {
   name = "github-actions-bootstrap-certs-policy"
-  role = aws_iam_role.github-actions-bootstrap-certs-role.id
+  role = aws_iam_role.github-actions-bootstrap-secret-role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [

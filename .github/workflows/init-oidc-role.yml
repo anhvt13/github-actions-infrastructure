@@ -1,0 +1,63 @@
+# Upstream dependency: IAM role "github-actions-bootstrap-secret-role" was manually created successful
+name: Initialize OIDC Infrastructure Deployment Role Workflow
+
+on:
+  # Only allows manually start this GitHub Actions workflow
+  workflow_dispatch:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ap-southeast-1
+  TF_WORKING_DIR: modules/infras-role
+
+# OIDC Infrastructure Deployment Role Initial Job
+jobs:
+  init-infras-deployment-role:
+    name: Initialize OIDC Infrastructure Deployment Role Workflow
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::249899229305:role/github-actions-bootstrap-secret-role
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform init
+
+      - name: Terraform Format Check
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform fmt -check -recursive
+
+      - name: Terraform Validate
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+        # HashiCorp support the saved plan (terraform plan -out=...) can be passed to terraform apply
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform apply -auto-approve
+

@@ -7,7 +7,7 @@ resource "aws_iam_role" "github-actions-bff-deployment-role" {
       {
         Effect = "Allow"
         Principal = {
-          Federated = aws_iam_openid_connect_provider.github-actions.arn
+          Federated = data.aws_iam_openid_connect_provider.github-actions.arn
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
@@ -98,17 +98,17 @@ resource "aws_iam_role_policy" "github-actions-bff-ecs-task-definition-policy" {
         ]
         Resource = "*"
       },
-      # {
-      #   Sid    = "PassRolesInTaskDefinition"
-      #   Effect = "Allow"
-      #   Action = [
-      #     "iam:PassRole"
-      #   ]
-      #   Resource = [
-      #     data.aws_iam_role.capstone-ecs-task-role.arn,
-      #     data.aws_iam_role.capstone-ecs-task-execution-role.arn
-      #   ]
-      # }
+      {
+        Sid    = "PassRolesInTaskDefinition"
+        Effect = "Allow"
+        Action = [
+          "iam:PassRole"
+        ]
+        Resource = [
+          data.aws_iam_role.capstone-ecs-task-role.arn,
+          data.aws_iam_role.capstone-ecs-task-execution-role.arn
+        ]
+      }
     ]
   })
 }
