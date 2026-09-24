@@ -1,4 +1,14 @@
-// Configuring an IAM role for trusted Github capstone infrastructure repo
+//TODO Reference to Github OIDC provider ARN
+data "terraform_remote_state" "oidc" {
+  backend = "s3"
+  config = {
+    bucket = "capstone-terraform-state-249899229305-ap-southeast-1-an"
+    key    = "oidc/terraform.tfstate"
+    region = "ap-southeast-1"
+  }
+}
+
+//TODO Configuring an IAM role for infrastructure deployment with trusted "capstone-infrastructure" repository assuming
 resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
   name = "github-actions-infrastructure-deployment-role"
   assume_role_policy = jsonencode({
@@ -7,7 +17,7 @@ resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
       {
         Effect = "Allow"
         Principal = {
-          Federated = data.aws_iam_openid_connect_provider.github-actions.arn
+          Federated = data.terraform_remote_state.oidc.outputs.github_oidc_provider_arn
         }
         Action = "sts:AssumeRoleWithWebIdentity"
         Condition = {
@@ -474,7 +484,7 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
       },
 
       # ============================================================
-      # S3 - Terraform state bucket
+      # S3 - Terraform infrastructure state bucket
       # ============================================================
       {
         Sid    = "TerraformStateBucket"
@@ -491,7 +501,7 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "s3:GetObject",
           "s3:PutObject"
         ]
-        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/terraform.tfstate"
+        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/terraform.tfstate"
       },
       {
         Sid    = "TerraformStateLock"
@@ -501,7 +511,7 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "s3:PutObject",
           "s3:DeleteObject"
         ]
-        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/terraform.tfstate.tflock"
+        Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/terraform.tfstate.tflock"
       },
 
       # ============================================================
