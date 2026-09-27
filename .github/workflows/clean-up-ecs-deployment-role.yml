@@ -1,4 +1,4 @@
-name: Clean up OIDC ECS Deployment Role
+name: Clean up OIDC ECS Service Deployment Role
 
 on:
   workflow_dispatch:
