@@ -13,10 +13,10 @@ env:
   AWS_REGION: ap-southeast-1
   TF_WORKING_DIR: modules/service-role
 
-# OIDC ECS Deployment Role Cleanup Job
+# OIDC ECS Service Deployment Role Cleanup Job
 jobs:
-  clean-up-infra-deployment-role:
-    name: Clean up OIDC Infrastructure Deployment Role
+  clean-up-ecs-service-deployment-role:
+    name: Clean up OIDC ECS Service Deployment Role
     runs-on: ubuntu-latest
     environment:
       name: prod

@@ -15,9 +15,9 @@ env:
   AWS_REGION: ap-southeast-1
   TF_WORKING_DIR: modules/service-role
 
-# OIDC ECS Deployment Role Initial Job
+# OIDC ECS Service Deployment Role Initial Job
 jobs:
-  init-ecs-deployment-role:
+  init-ecs-service-deployment-role:
     name: Initialize OIDC ECS Service Deployment Role
     runs-on: ubuntu-latest
     environment:
