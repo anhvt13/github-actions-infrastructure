@@ -105,8 +105,8 @@ resource "aws_iam_role_policy" "github-actions-bff-ecs-task-definition-policy" {
           "iam:PassRole"
         ]
         Resource = [
-          data.aws_iam_role.capstone-ecs-task-role.arn,
-          data.aws_iam_role.capstone-ecs-task-execution-role.arn
+          var.capstone_ecs_task_role_arn,
+          var.capstone_ecs_task_execution_role_arn
         ]
       }
     ]

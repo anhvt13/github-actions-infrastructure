@@ -1,9 +1,9 @@
-// References to ecs task role provisioned by capstone-infrastructure module
-data "aws_iam_role" "capstone-ecs-task-role" {
-  name = "capstone-ecs-task-role"
+variable "capstone_ecs_task_role_arn" {
+  description = "The ARN of ECS task role"
+  type        = string
 }
 
-// References to ecs task execution role provisioned by capstone-infrastructure module
-data "aws_iam_role" "capstone-ecs-task-execution-role" {
-  name = "capstone-ecs-task-execution-role"
+variable "capstone_ecs_task_execution_role_arn" {
+  description = "The ARN of ECS task execution role"
+  type        = string
 }
