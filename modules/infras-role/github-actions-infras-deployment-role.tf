@@ -1,3 +1,13 @@
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
+
 //TODO Configuring an IAM role for infrastructure deployment with trusted "capstone-infrastructure" repository assuming
 resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
   name = "github-actions-infrastructure-deployment-role"
