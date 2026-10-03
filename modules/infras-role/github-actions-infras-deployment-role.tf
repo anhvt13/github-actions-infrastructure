@@ -166,7 +166,9 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
         Resource = [
           "arn:aws:iam::249899229305:role/capstone-bastion-ssm-instant-role",
           "arn:aws:iam::249899229305:role/capstone-ecs-task-role",
-          "arn:aws:iam::249899229305:role/capstone-ecs-task-execution-role"
+          "arn:aws:iam::249899229305:role/capstone-ecs-task-execution-role",
+          "arn:aws:iam::249899229305:role/driver-blue-green-hook-ecs-assume-role",
+          "arn:aws:iam::249899229305:role/driver-blue-green-hook-execution-role"
         ]
       },
 
