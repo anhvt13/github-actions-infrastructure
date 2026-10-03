@@ -161,7 +161,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "iam:TagRole",
           "iam:UntagRole",
           "iam:CreateInstanceProfile",
-          "iam:ListInstanceProfilesForRole"
+          "iam:ListInstanceProfilesForRole",
+          "iam:PutRolePolicy"
         ]
         Resource = [
           "arn:aws:iam::249899229305:role/capstone-bastion-ssm-instant-role",
