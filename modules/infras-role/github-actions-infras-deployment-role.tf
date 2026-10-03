@@ -537,7 +537,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
         Sid    = "LambdaFunction"
         Effect = "Allow"
         Action = [
-          "lambda:CreateFunction"
+          "lambda:CreateFunction",
+          "lambda:GetFunction"
         ]
         Resource = [
           "arn:aws:lambda:ap-southeast-1:249899229305:function:driver-blue-green-hook-function"
