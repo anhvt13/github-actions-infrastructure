@@ -527,6 +527,20 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "route53:CreateHostedZone"
         ]
         Resource = "*"
+      },
+
+      # ============================================================
+      # Lambda deployment hook function
+      # ============================================================
+      {
+        Sid    = "LambdaFunction"
+        Effect = "Allow"
+        Action = [
+          "lambda:CreateFunction"
+        ]
+        Resource = [
+          "arn:aws:lambda:ap-southeast-1:249899229305:function:driver-blue-green-hook-function"
+        ]
       }
     ]
   })
