@@ -118,7 +118,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "ec2:DetachInternetGateway",
           "ec2:DescribeInstanceTypes",
           "ec2:DescribeInstanceCreditSpecifications",
-          "ec2:ModifySecurityGroupRules"
+          "ec2:ModifySecurityGroupRules",
+          "ec2:DeleteNetworkInterface"
         ]
         Resource = "*"
       },
