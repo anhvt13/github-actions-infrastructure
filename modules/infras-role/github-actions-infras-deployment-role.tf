@@ -548,7 +548,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "lambda:ListVersionsByFunction",
           "lambda:GetFunctionCodeSigningConfig",
           "lambda:DeleteFunction",
-          "lambda:UpdateFunctionCode"
+          "lambda:UpdateFunctionCode",
+          "lambda:UpdateFunctionConfiguration"
         ]
         Resource = [
           "arn:aws:lambda:ap-southeast-1:249899229305:function:driver-blue-green-hook-function"
