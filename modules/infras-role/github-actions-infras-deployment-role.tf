@@ -117,7 +117,8 @@ resource "aws_iam_role_policy" "github-actions-capstone-infrastructure-policy" {
           "ec2:DisassociateRouteTable",
           "ec2:DetachInternetGateway",
           "ec2:DescribeInstanceTypes",
-          "ec2:DescribeInstanceCreditSpecifications"
+          "ec2:DescribeInstanceCreditSpecifications",
+          "ec2:ModifySecurityGroupRules"
         ]
         Resource = "*"
       },
