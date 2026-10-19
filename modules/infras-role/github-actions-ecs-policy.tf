@@ -43,16 +43,26 @@ locals {
     ]
     Resource = "*"
   }
+
+  github_actions_application_autoscaling_statement = {
+    Sid    = "AppAutoScaling"
+    Effect = "Allow"
+    Action = [
+      "application-autoscaling:RegisterScalableTarget"
+    ]
+    Resource = "arn:aws:application-autoscaling:ap-southeast-1:249899229305:scalable-target/*"
+  }
 }
 
 resource "aws_iam_policy" "github_actions_capstone_ecs_policy" {
   name        = "github-actions-capstone-ecs-policy"
-  description = "ECS, service discovery policies management"
+  description = "ECS, service discovery, application autoscaling policies management"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       local.github_actions_ecs_management_statement,
-      local.github_actions_service_discovery_statement
+      local.github_actions_service_discovery_statement,
+      local.github_actions_application_autoscaling_statement
     ]
   })
 }
