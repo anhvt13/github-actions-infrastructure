@@ -49,7 +49,8 @@ locals {
     Effect = "Allow"
     Action = [
       "application-autoscaling:RegisterScalableTarget",
-      "application-autoscaling:DescribeScalableTargets"
+      "application-autoscaling:DescribeScalableTargets",
+      "application-autoscaling:ListTagsForResource"
     ]
     Resource = "arn:aws:application-autoscaling:ap-southeast-1:249899229305:scalable-target/*"
   }
