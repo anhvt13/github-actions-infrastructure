@@ -51,7 +51,8 @@ locals {
       "application-autoscaling:RegisterScalableTarget",
       "application-autoscaling:DescribeScalableTargets",
       "application-autoscaling:ListTagsForResource",
-      "application-autoscaling:DeregisterScalableTarget"
+      "application-autoscaling:DeregisterScalableTarget",
+      "application-autoscaling:PutScalingPolicy"
     ]
     Resource = "arn:aws:application-autoscaling:ap-southeast-1:249899229305:scalable-target/*"
   }
