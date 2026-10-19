@@ -48,7 +48,8 @@ locals {
     Sid    = "AppAutoScaling"
     Effect = "Allow"
     Action = [
-      "application-autoscaling:RegisterScalableTarget"
+      "application-autoscaling:RegisterScalableTarget",
+      "application-autoscaling:DescribeScalableTargets"
     ]
     Resource = "arn:aws:application-autoscaling:ap-southeast-1:249899229305:scalable-target/*"
   }
