@@ -52,6 +52,19 @@ locals {
     ]
     Resource = "arn:aws:application-autoscaling:ap-southeast-1:249899229305:scalable-target/*"
   }
+
+  github_actions_service_link_role_statement = {
+    "Sid" : "AllowECSApplicationAutoScalingServiceLinkedRole",
+    "Effect" : "Allow",
+    "Action" : "iam:CreateServiceLinkedRole",
+    "Resource" : "arn:aws:iam::*:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+    "Condition" : {
+      "StringLike" : {
+        "iam:AWSServiceName" : "ecs.application-autoscaling.amazonaws.com"
+      }
+    }
+  }
+
 }
 
 resource "aws_iam_policy" "github_actions_capstone_ecs_policy" {
@@ -62,7 +75,8 @@ resource "aws_iam_policy" "github_actions_capstone_ecs_policy" {
     Statement = [
       local.github_actions_ecs_management_statement,
       local.github_actions_service_discovery_statement,
-      local.github_actions_application_autoscaling_statement
+      local.github_actions_application_autoscaling_statement,
+      local.github_actions_service_link_role_statement
     ]
   })
 }
