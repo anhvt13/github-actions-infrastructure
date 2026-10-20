@@ -98,7 +98,10 @@ locals {
       "s3:GetObject",
       "s3:PutObject"
     ]
-    Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/terraform.tfstate"
+    Resource = [
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/terraform.tfstate",
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/secrets/terraform.tfstate"
+    ]
   }
 
   github_actions_terraform_state_lock_statement = {
@@ -109,7 +112,10 @@ locals {
       "s3:PutObject",
       "s3:DeleteObject"
     ]
-    Resource = "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/terraform.tfstate.tflock"
+    Resource = [
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/terraform.tfstate.tflock",
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/secrets/terraform.tfstate.tflock"
+    ]
   }
 
   # ============
