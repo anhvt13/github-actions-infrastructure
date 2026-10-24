@@ -8,7 +8,8 @@ locals {
     Action = [
       "cloudfront:CreateDistribution",
       "cloudfront:TagResource",
-      "cloudfront:GetDistribution"
+      "cloudfront:GetDistribution",
+      "cloudfront:ListTagsForResource"
     ]
     Resource = "arn:aws:cloudfront::249899229305:distribution/*"
   }
