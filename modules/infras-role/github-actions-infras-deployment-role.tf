@@ -68,6 +68,11 @@ resource "aws_iam_role_policy_attachment" "operation-policy-attachment" {
   policy_arn = aws_iam_policy.github_actions_capstone_operation_policy.arn
 }
 
+resource "aws_iam_role_policy_attachment" "cdn-policy-attachment" {
+  role       = aws_iam_role.github-actions-infrastructure-deployment-role.id
+  policy_arn = aws_iam_policy.github_actions_capstone_cdn_policy.arn
+}
+
 
 
 
