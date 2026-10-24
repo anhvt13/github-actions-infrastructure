@@ -6,7 +6,8 @@ locals {
     Sid    = "Cloudfront"
     Effect = "Allow"
     Action = [
-      "cloudfront:CreateDistribution"
+      "cloudfront:CreateDistribution",
+      "cloudfront:TagResource"
     ]
     Resource = "arn:aws:cloudfront::249899229305:distribution/*"
   }
