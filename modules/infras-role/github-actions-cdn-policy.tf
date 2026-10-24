@@ -10,7 +10,8 @@ locals {
       "cloudfront:TagResource",
       "cloudfront:GetDistribution",
       "cloudfront:ListTagsForResource",
-      "cloudfront:UpdateDistribution"
+      "cloudfront:UpdateDistribution",
+      "cloudfront:DeleteDistribution"
     ]
     Resource = "arn:aws:cloudfront::249899229305:distribution/*"
   }
