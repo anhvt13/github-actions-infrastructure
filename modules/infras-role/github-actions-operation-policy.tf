@@ -143,7 +143,8 @@ locals {
       "lambda:GetFunctionCodeSigningConfig",
       "lambda:DeleteFunction",
       "lambda:UpdateFunctionCode",
-      "lambda:UpdateFunctionConfiguration"
+      "lambda:UpdateFunctionConfiguration",
+      "lambda:PublishVersion"
     ]
     Resource = [
       "arn:aws:lambda:ap-southeast-1:249899229305:function:driver-blue-green-hook-function",
