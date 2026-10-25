@@ -160,15 +160,10 @@ locals {
     Actions = [
       "lambda:GetFunction"
     ]
-    Resources = [
-      "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function:*"
-    ]
+    Resources = "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function:*"
   }
 
-
 }
-
-
 
 resource "aws_iam_policy" "github_actions_capstone_operation_policy" {
   name        = "github-actions-capstone-operation-policy"
