@@ -153,7 +153,7 @@ locals {
   }
 
   # =================================
-  # Lambda Edge Publish
+  # Lambda@Edge Publish
   # =================================
   github_actions_lambda_egde_statement = {
     Sid    = "AllowGetCognitoJwtEdgeAuthFunction"
@@ -163,6 +163,25 @@ locals {
       "lambda:GetFunctionConfiguration"
     ]
     Resource = "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function:*"
+  }
+
+  # =================================
+  # Lambda@Edge service-linked role
+  # =================================
+  github_actions_lambda_edge_service_linked_role_statement = {
+    Sid      = "CreateLambdaEdgeServiceLinkedRole"
+    Effect   = "Allow"
+    Action   = "iam:CreateServiceLinkedRole"
+    Resource = "*"
+
+    Condition = {
+      StringEquals = {
+        "iam:AWSServiceName" = [
+          "replicator.lambda.amazonaws.com",
+          "logger.cloudfront.amazonaws.com"
+        ]
+      }
+    }
   }
 
 }
@@ -182,7 +201,8 @@ resource "aws_iam_policy" "github_actions_capstone_operation_policy" {
       local.github_actions_terraform_state_lock_statement,
       local.github_actions_route53_statement,
       local.github_actions_lambda_hook_statement,
-      local.github_actions_lambda_egde_statement
+      local.github_actions_lambda_egde_statement,
+      local.github_actions_lambda_edge_service_linked_role_statement
     ]
   })
 }
