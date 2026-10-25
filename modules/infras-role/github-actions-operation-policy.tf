@@ -151,6 +151,21 @@ locals {
     ]
   }
 
+  # =================================
+  # Lambda Edge Publish
+  # =================================
+  github_actions_lambda_egde_statement = {
+    Sid    = "AllowGetCognitoJwtEdgeAuthFunction"
+    Effect = "Allow"
+    Actions = [
+      "lambda:GetFunction"
+    ]
+    Resources = [
+      "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function:*"
+    ]
+  }
+
+
 }
 
 
@@ -169,7 +184,8 @@ resource "aws_iam_policy" "github_actions_capstone_operation_policy" {
       local.github_actions_terraform_state_obj_statement,
       local.github_actions_terraform_state_lock_statement,
       local.github_actions_route53_statement,
-      local.github_actions_lambda_hook_statement
+      local.github_actions_lambda_hook_statement,
+      local.github_actions_lambda_egde_statement
     ]
   })
 }
