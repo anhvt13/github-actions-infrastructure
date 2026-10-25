@@ -159,7 +159,8 @@ locals {
     Sid    = "AllowGetCognitoJwtEdgeAuthFunction"
     Effect = "Allow"
     Action = [
-      "lambda:GetFunction"
+      "lambda:GetFunction",
+      "lambda:GetFunctionConfiguration"
     ]
     Resource = "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function:*"
   }
