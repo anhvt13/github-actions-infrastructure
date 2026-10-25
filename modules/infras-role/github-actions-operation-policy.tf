@@ -157,10 +157,10 @@ locals {
   github_actions_lambda_egde_statement = {
     Sid    = "AllowGetCognitoJwtEdgeAuthFunction"
     Effect = "Allow"
-    Actions = [
+    Action = [
       "lambda:GetFunction"
     ]
-    Resources = "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function:*"
+    Resource = "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function:*"
   }
 
 }
