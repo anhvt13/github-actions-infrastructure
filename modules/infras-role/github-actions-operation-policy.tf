@@ -146,7 +146,8 @@ locals {
       "lambda:UpdateFunctionConfiguration"
     ]
     Resource = [
-      "arn:aws:lambda:ap-southeast-1:249899229305:function:driver-blue-green-hook-function"
+      "arn:aws:lambda:ap-southeast-1:249899229305:function:driver-blue-green-hook-function",
+      "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function"
     ]
   }
 
