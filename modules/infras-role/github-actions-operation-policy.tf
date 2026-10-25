@@ -160,7 +160,9 @@ locals {
     Effect = "Allow"
     Action = [
       "lambda:GetFunction",
-      "lambda:GetFunctionConfiguration"
+      "lambda:GetFunctionConfiguration",
+      "lambda:EnableReplication*",
+      "lambda:DisableReplication*"
     ]
     Resource = "arn:aws:lambda:us-east-1:249899229305:function:cognito-jwt-edge-auth-function:*"
   }
