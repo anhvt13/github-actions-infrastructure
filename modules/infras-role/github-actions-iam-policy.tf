@@ -95,7 +95,8 @@ locals {
       "arn:aws:iam::249899229305:role/driver-blue-green-hook-execution-role",
       "arn:aws:iam::249899229305:role/driver-blue-green-hook-ecs-assume-role",
       "arn:aws:iam::249899229305:role/ecs-invoke-alb-infras-role",
-      "arn:aws:iam::249899229305:role/cognito-jwt-edge-auth-execution-role"
+      "arn:aws:iam::249899229305:role/cognito-jwt-edge-auth-execution-role",
+      "arn:aws:iam::249899229305:role/rds-proxy-role"
     ]
   }
 }
