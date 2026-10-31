@@ -50,7 +50,8 @@ locals {
     Sid    = "RdsProxyTargetGroup"
     Effect = "Allow"
     Action = [
-      "rds:ModifyDBProxyTargetGroup"
+      "rds:ModifyDBProxyTargetGroup",
+      "rds:RegisterDBProxyTargets"
     ]
     Resource = "arn:aws:rds:ap-southeast-1:249899229305:target-group:*"
   }
