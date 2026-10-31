@@ -26,6 +26,18 @@ locals {
     Resource = "*"
   }
 
+  #==========================================
+  # RDS Proxy Management
+  #=========================================
+  github_actions_rds_proxy_management_statement = {
+    Sid    = "RdsProxy"
+    Effect = "Allow"
+    Action = [
+      "rds:CreateDBProxy"
+    ]
+    Resource = "arn:aws:rds:ap-southeast-1:249899229305:db-proxy:*"
+  }
+
   # ===========================
   # ElastiCache  Valkey
   # ===========================
@@ -106,7 +118,8 @@ resource "aws_iam_policy" "github_actions_capstone_data_policy" {
       local.github_actions_elastic_cache_statement,
       local.github_actions_secret_manager_statement,
       local.github_actions_secret_rds_manager_statement,
-      local.github_actions_kms_permision_statement
+      local.github_actions_kms_permision_statement,
+      local.github_actions_rds_proxy_management_statement
     ]
   })
 }
