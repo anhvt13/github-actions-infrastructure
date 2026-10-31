@@ -65,7 +65,8 @@ locals {
     Sid    = "RdsProxyRegister"
     Effect = "Allow"
     Action = [
-      "rds:RegisterDBProxyTargets"
+      "rds:RegisterDBProxyTargets",
+      "rds:DeregisterDBProxyTargets"
     ]
     Resource = "arn:aws:rds:ap-southeast-1:249899229305:cluster:capstone-aurora-cluster"
   }
