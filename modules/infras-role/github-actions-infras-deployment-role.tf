@@ -8,7 +8,7 @@ terraform {
   }
 }
 
-//TODO: Configuring an IAM role for infrastructure deployment with trusted "capstone-infrastructure" repository assuming
+//TODO: Configuring IAM role for infrastructure deployment trusted "capstone-infrastructure" Git repository
 resource "aws_iam_role" "github-actions-infrastructure-deployment-role" {
   name = "github-actions-infrastructure-deployment-role"
   assume_role_policy = jsonencode({
