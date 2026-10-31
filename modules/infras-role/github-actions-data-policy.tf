@@ -35,7 +35,8 @@ locals {
     Action = [
       "rds:CreateDBProxy",
       "rds:DescribeDBProxies",
-      "rds:DeleteDBProxy"
+      "rds:DeleteDBProxy",
+      "rds:ModifyDBProxyTargetGroup"
     ]
     Resource = "arn:aws:rds:ap-southeast-1:249899229305:db-proxy:*"
   }
