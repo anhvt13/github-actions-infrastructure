@@ -35,10 +35,21 @@ locals {
     Action = [
       "rds:CreateDBProxy",
       "rds:DescribeDBProxies",
-      "rds:DeleteDBProxy",
-      "rds:ModifyDBProxyTargetGroup"
+      "rds:DeleteDBProxy"
     ]
     Resource = "arn:aws:rds:ap-southeast-1:249899229305:db-proxy:*"
+  }
+
+  #==========================================
+  # RDS Proxy Target Group Management
+  #=========================================
+  github_actions_rds_proxy_target_group_management_statement = {
+    Sid    = "RdsProxyTargetGroup"
+    Effect = "Allow"
+    Action = [
+      "rds:ModifyDBProxyTargetGroup"
+    ]
+    Resource = "arn:aws:rds:ap-southeast-1:249899229305:target-group:*"
   }
 
   # ===========================
@@ -122,7 +133,8 @@ resource "aws_iam_policy" "github_actions_capstone_data_policy" {
       local.github_actions_secret_manager_statement,
       local.github_actions_secret_rds_manager_statement,
       local.github_actions_kms_permision_statement,
-      local.github_actions_rds_proxy_management_statement
+      local.github_actions_rds_proxy_management_statement,
+      local.github_actions_rds_proxy_target_group_management_statement
     ]
   })
 }
