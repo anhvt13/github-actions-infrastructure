@@ -54,6 +54,18 @@ locals {
     Resource = "arn:aws:rds:ap-southeast-1:249899229305:target-group:*"
   }
 
+  #==========================================
+  # RDS Proxy Register Management
+  #=========================================
+  github_actions_rds_proxy_register_management_statement = {
+    Sid    = "RdsProxyRegister"
+    Effect = "Allow"
+    Action = [
+      "rds:RegisterDBProxyTargets"
+    ]
+    Resource = "arn:aws:rds:ap-southeast-1:249899229305:cluster:capstone-aurora-cluster"
+  }
+
   # ===========================
   # ElastiCache  Valkey
   # ===========================
@@ -136,7 +148,8 @@ resource "aws_iam_policy" "github_actions_capstone_data_policy" {
       local.github_actions_secret_rds_manager_statement,
       local.github_actions_kms_permision_statement,
       local.github_actions_rds_proxy_management_statement,
-      local.github_actions_rds_proxy_target_group_management_statement
+      local.github_actions_rds_proxy_target_group_management_statement,
+      local.github_actions_rds_proxy_register_management_statement
     ]
   })
 }
