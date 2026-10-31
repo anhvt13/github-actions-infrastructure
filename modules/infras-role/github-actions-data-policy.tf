@@ -33,7 +33,8 @@ locals {
     Sid    = "RdsProxy"
     Effect = "Allow"
     Action = [
-      "rds:CreateDBProxy"
+      "rds:CreateDBProxy",
+      "rds:DescribeDBProxies"
     ]
     Resource = "arn:aws:rds:ap-southeast-1:249899229305:db-proxy:*"
   }
