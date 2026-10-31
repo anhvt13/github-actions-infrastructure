@@ -40,7 +40,8 @@ locals {
       "rds:DescribeDBProxyTargetGroups",
       "rds:RegisterDBProxyTargets",
       "rds:DescribeDBProxyTargets",
-      "rds:DeregisterDBProxyTargets"
+      "rds:DeregisterDBProxyTargets",
+      "rds:ModifyDBProxy"
     ]
     Resource = "arn:aws:rds:ap-southeast-1:249899229305:db-proxy:*"
   }
