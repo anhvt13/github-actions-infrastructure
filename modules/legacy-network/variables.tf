@@ -1,3 +1,15 @@
+variable "primary_aws_region" {
+  description = "AWS primary region"
+  type        = string
+  default     = "ap-southeast-1"
+}
+
+variable "dr_aws_region" {
+  description = "AWS disaster recovery region"
+  type        = string
+  default     = "ap-northeast-1"
+}
+
 variable "network_tags" {
   type        = map(string)
   description = "Common tags applied to all network resources"
