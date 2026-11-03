@@ -2,7 +2,7 @@
 # Primary Site Network module
 # ==========================
 module "primary-network" {
-  source = "primary"
+  source = "./primary"
 
   availability_zones             = data.aws_availability_zones.available.names
   capstone_db_subnet_1_cidr      = var.capstone_db_subnet_1_cidr
@@ -20,7 +20,7 @@ module "primary-network" {
 # Disaster Recovery (DR) Site Network module
 # ==========================================
 module "dr-network" {
-  source = "dr"
+  source = "./dr"
 
   availability_zones                = data.aws_availability_zones.available.names
   dr_capstone_db_subnet_1_cidr      = var.dr_capstone_db_subnet_1_cidr
