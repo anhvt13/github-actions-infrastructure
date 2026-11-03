@@ -24,7 +24,7 @@ permissions:
 
 env:
   PRIMARY_AWS_REGION: ap-southeast-1
-  TF_WORKING_DIR: legacy-network
+  TF_WORKING_DIR: modules/legacy-network
 
 # Legacy Networks Infrastructure Deployment Job
 jobs:
