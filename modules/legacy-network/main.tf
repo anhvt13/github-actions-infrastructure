@@ -3,8 +3,11 @@
 # ==========================
 module "primary-network" {
   source = "./primary"
+  providers = {
+    aws = aws.primary
+  }
 
-  availability_zones             = data.aws_availability_zones.available.names
+  availability_zones             = data.aws_availability_zones.primary_availability_zones.names
   capstone_db_subnet_1_cidr      = var.capstone_db_subnet_1_cidr
   capstone_db_subnet_2_cidr      = var.capstone_db_subnet_2_cidr
   capstone_private_subnet_1_cidr = var.capstone_private_subnet_1_cidr
@@ -21,8 +24,11 @@ module "primary-network" {
 # ==========================================
 module "dr-network" {
   source = "./dr"
+  providers = {
+    aws = aws.dr
+  }
 
-  availability_zones                = data.aws_availability_zones.available.names
+  availability_zones                = data.aws_availability_zones.dr_availability_zones.names
   dr_capstone_db_subnet_1_cidr      = var.dr_capstone_db_subnet_1_cidr
   dr_capstone_db_subnet_2_cidr      = var.dr_capstone_db_subnet_2_cidr
   dr_capstone_private_subnet_1_cidr = var.dr_capstone_private_subnet_1_cidr
