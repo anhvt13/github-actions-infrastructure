@@ -100,7 +100,8 @@ locals {
     ]
     Resource = [
       "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/terraform.tfstate",
-      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/secrets/terraform.tfstate"
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/secrets/terraform.tfstate",
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/legacy-network/terraform.tfstate"
     ]
   }
 
@@ -114,7 +115,8 @@ locals {
     ]
     Resource = [
       "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/terraform.tfstate.tflock",
-      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/secrets/terraform.tfstate.tflock"
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/secrets/terraform.tfstate.tflock",
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/legacy-network/terraform.tfstate.tflock"
     ]
   }
 
