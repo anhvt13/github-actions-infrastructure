@@ -16,6 +16,7 @@ module "primary-network" {
   capstone_public_subnet_2_cidr  = var.capstone_public_subnet_2_cidr
   capstone_vpc_cidr              = var.capstone_vpc_cidr
   network_tags                   = var.network_tags
+  security_tags                  = var.security_tags
 }
 
 
@@ -37,4 +38,5 @@ module "dr-network" {
   dr_capstone_public_subnet_2_cidr  = var.dr_capstone_public_subnet_2_cidr
   dr_capstone_vpc_cidr              = var.dr_capstone_vpc_cidr
   network_tags                      = var.network_tags
+  security_tags                     = var.security_tags
 }

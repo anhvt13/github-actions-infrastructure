@@ -61,3 +61,8 @@ output "dr_capstone_db_subnet_2_id" {
   description = "ID of the DR database subnet 2"
   value       = aws_subnet.dr-capstone-db-subnet-2.id
 }
+
+output "dr_capstone_db_sg_id" {
+  description = "Security group ID for DR database"
+  value       = aws_security_group.dr-capstone-db-sg.id
+}
