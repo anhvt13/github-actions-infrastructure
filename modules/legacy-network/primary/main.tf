@@ -96,3 +96,19 @@ resource "aws_subnet" "capstone-db-subnet-2" {
     var.network_tags
   )
 }
+
+# ===============================
+# Database Security Group
+# ===============================
+resource "aws_security_group" "capstone-db-sg" {
+  name        = "capstone-db-sg"
+  description = "DB security group"
+  vpc_id      = aws_vpc.capstone-vpc.id
+
+  tags = merge(
+    {
+      Name = "capstone-db-sg"
+    },
+    var.security_tags
+  )
+}

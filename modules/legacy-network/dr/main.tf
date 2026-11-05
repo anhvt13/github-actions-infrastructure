@@ -97,3 +97,19 @@ resource "aws_subnet" "dr-capstone-db-subnet-2" {
   )
 }
 
+# ===============================
+# DR Database Security Group
+# ===============================
+resource "aws_security_group" "dr-capstone-db-sg" {
+  name        = "dr-capstone-db-sg"
+  description = "DB security group on DR site"
+  vpc_id      = aws_vpc.dr-capstone-vpc.id
+
+  tags = merge(
+    {
+      Name = "dr-capstone-db-sg"
+    },
+    var.security_tags
+  )
+}
+

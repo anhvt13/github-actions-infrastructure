@@ -20,6 +20,16 @@ variable "network_tags" {
   }
 }
 
+variable "security_tags" {
+  type        = map(string)
+  description = "Common tags applied to all security resources"
+  default = {
+    Layer     = "security"
+    Project   = "capstone"
+    ManagedBy = "terraform"
+  }
+}
+
 variable "capstone_vpc_cidr" {
   description = "CIDR block for the VPC"
   type        = string

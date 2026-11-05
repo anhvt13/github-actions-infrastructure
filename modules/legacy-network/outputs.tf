@@ -54,6 +54,11 @@ output "capstone_db_subnet_2_id" {
   value       = module.primary-network.capstone_db_subnet_2_id
 }
 
+output "capstone_db_sg_id" {
+  description = "ID of database security group"
+  value       = module.primary-network.capstone_db_sg_id
+}
+
 output "dr_capstone_vpc_id" {
   description = "ID of the DR capstone vpc"
   value       = module.dr-network.dr_capstone_vpc_id
@@ -107,4 +112,9 @@ output "dr_capstone_db_subnet_1_id" {
 output "dr_capstone_db_subnet_2_id" {
   description = "ID of the DR database subnet 2"
   value       = module.dr-network.dr_capstone_db_subnet_2_id
+}
+
+output "dr_capstone_db_sg_id" {
+  description = "ID of DR database security group"
+  value       = module.dr-network.dr_capstone_db_sg_id
 }

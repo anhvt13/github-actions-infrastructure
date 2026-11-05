@@ -3,6 +3,11 @@ variable "network_tags" {
   description = "Common tags applied to all network resources"
 }
 
+variable "security_tags" {
+  type        = map(string)
+  description = "Common tags applied to all security resources"
+}
+
 variable "availability_zones" {
   description = "List of all availability zones from current region"
   type        = list(string)
