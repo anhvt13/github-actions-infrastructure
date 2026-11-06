@@ -76,7 +76,10 @@ locals {
     Action = [
       "ssm:GetParameter"
     ]
-    Resource = "arn:aws:ssm:ap-southeast-1::parameter/aws/service/ami-amazon-linux-latest/*"
+    Resource = [
+      "arn:aws:ssm:ap-southeast-1::parameter/aws/service/ami-amazon-linux-latest/*",
+      "arn:aws:ssm:ap-northeast-1::parameter/aws/service/ami-amazon-linux-latest/*"
+    ]
   }
 
   # ======================================
