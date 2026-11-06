@@ -1,4 +1,4 @@
-name: Clean up OIDC ECS Service Deployment Role
+name: ECS Deployment Role Cleanup
 
 on:
   workflow_dispatch:
@@ -13,10 +13,10 @@ env:
   AWS_REGION: ap-southeast-1
   TF_WORKING_DIR: modules/service-role
 
-# OIDC ECS Service Deployment Role Cleanup Job
+# ECS Service Deployment Role Cleanup Job
 jobs:
   clean-up-ecs-service-deployment-role:
-    name: Clean up OIDC ECS Service Deployment Role
+    name: ECS Deployment Role Cleanup
     runs-on: ubuntu-latest
     environment:
       name: prod

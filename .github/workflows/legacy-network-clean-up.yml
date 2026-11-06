@@ -1,4 +1,4 @@
-name: Capstone Legacy Network Infrastructure Clean Up
+name: Capstone Legacy Network Infrastructure Cleanup
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ env:
 # Legacy Network Infrastructure Cleanup Job
 jobs:
   terraform-destroy:
-    name: Terraform Destroy
+    name: Capstone Legacy Network Infrastructure Cleanup
     runs-on: ubuntu-latest
     environment:
       name: prod

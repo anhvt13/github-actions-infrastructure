@@ -1,4 +1,4 @@
-name: Clean up OIDC Infrastructure Deployment Role
+name: Infrastructure Deployment Role Cleanup
 
 on:
   workflow_dispatch:
@@ -13,10 +13,10 @@ env:
   AWS_REGION: ap-southeast-1
   TF_WORKING_DIR: modules/infras-role
 
-# OIDC Infrastructure Deployment Role Cleanup Job
+# Infrastructure Deployment Role Cleanup Job
 jobs:
   clean-up-infra-deployment-role:
-    name: Clean up OIDC Infrastructure Deployment Role
+    name: Infrastructure Deployment Role Cleanup
     runs-on: ubuntu-latest
     environment:
       name: prod

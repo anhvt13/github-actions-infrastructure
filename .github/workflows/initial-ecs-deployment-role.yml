@@ -1,5 +1,5 @@
 # Upstream dependency: IAM role "github-actions-bootstrap-role" was manually created successful
-name: Initialize OIDC ECS Service Deployment Role
+name: ECS Deployment Role Initialize
 
 on:
   # Only allows manually start this GitHub Actions workflow
@@ -15,10 +15,10 @@ env:
   AWS_REGION: ap-southeast-1
   TF_WORKING_DIR: modules/service-role
 
-# OIDC ECS Service Deployment Role Initial Job
+# ECS Service Deployment Role Initial Job
 jobs:
   init-ecs-service-deployment-role:
-    name: Initialize OIDC ECS Service Deployment Role
+    name: ECS Deployment Role Initialize
     runs-on: ubuntu-latest
     environment:
       name: prod
