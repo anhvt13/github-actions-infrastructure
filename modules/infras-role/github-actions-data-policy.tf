@@ -22,7 +22,8 @@ locals {
       "rds:ModifyDBSubnetGroup",
       "rds:ListTagsForResource",
       "rds:DescribeGlobalClusters",
-      "rds:CreateGlobalCluster"
+      "rds:CreateGlobalCluster",
+      "rds:DeleteGlobalCluster"
     ]
     Resource = "*"
   }
