@@ -117,7 +117,8 @@ locals {
       "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/bff/tls-*",
       "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/driver/tls-*",
       "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/bff/oauth2-*",
-      "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/bg/tls-*"
+      "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/bg/tls-*",
+      "arn:aws:secretsmanager:ap-southeast-1:249899229305:secret:capstone/aurora/credential-*"
     ]
   }
 
