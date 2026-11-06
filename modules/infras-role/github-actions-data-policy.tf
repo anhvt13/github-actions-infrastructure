@@ -23,7 +23,8 @@ locals {
       "rds:ListTagsForResource",
       "rds:DescribeGlobalClusters",
       "rds:CreateGlobalCluster",
-      "rds:DeleteGlobalCluster"
+      "rds:DeleteGlobalCluster",
+      "rds:ModifyGlobalCluster"
     ]
     Resource = "*"
   }
