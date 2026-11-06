@@ -24,7 +24,8 @@ locals {
       "rds:DescribeGlobalClusters",
       "rds:CreateGlobalCluster",
       "rds:DeleteGlobalCluster",
-      "rds:ModifyGlobalCluster"
+      "rds:ModifyGlobalCluster",
+      "rds:RemoveFromGlobalCluster"
     ]
     Resource = "*"
   }
