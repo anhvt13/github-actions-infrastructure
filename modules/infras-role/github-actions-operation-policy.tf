@@ -102,6 +102,7 @@ locals {
       "s3:PutObject"
     ]
     Resource = [
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/ecs-deployment-role/terraform.tfstate",
       "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/primary/terraform.tfstate",
       "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/dr/terraform.tfstate",
       "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/secrets/terraform.tfstate",
@@ -118,6 +119,7 @@ locals {
       "s3:DeleteObject"
     ]
     Resource = [
+      "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/ecs-deployment-role/terraform.tfstate.tflock",
       "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/primary/terraform.tfstate.tflock",
       "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/infras/dr/terraform.tfstate.tflock",
       "arn:aws:s3:::capstone-terraform-state-249899229305-ap-southeast-1-an/secrets/terraform.tfstate.tflock",
