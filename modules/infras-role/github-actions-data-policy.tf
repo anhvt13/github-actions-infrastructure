@@ -25,7 +25,8 @@ locals {
       "rds:CreateGlobalCluster",
       "rds:DeleteGlobalCluster",
       "rds:ModifyGlobalCluster",
-      "rds:RemoveFromGlobalCluster"
+      "rds:RemoveFromGlobalCluster",
+      "rds:PromoteReadReplicaDBCluster"
     ]
     Resource = "*"
   }
@@ -79,7 +80,7 @@ locals {
   }
 
   # ===========================
-  # ElastiCache  Valkey
+  # ElastiCache Valkey
   # ===========================
   github_actions_elastic_cache_statement = {
     Sid    = "ElastiCache"
