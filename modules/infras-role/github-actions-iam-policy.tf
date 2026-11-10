@@ -24,6 +24,8 @@ locals {
       "iam:DeleteRolePolicy"
     ]
     Resource = [
+      "arn:aws:iam::249899229305:role/github-actions-bff-deployment-role",
+      "arn:aws:iam::249899229305:role/github-actions-driver-deployment-role",
       "arn:aws:iam::249899229305:role/capstone-bastion-ssm-instant-role",
       "arn:aws:iam::249899229305:role/capstone-ecs-task-role",
       "arn:aws:iam::249899229305:role/capstone-ecs-task-execution-role",
@@ -32,6 +34,8 @@ locals {
       "arn:aws:iam::249899229305:role/ecs-invoke-alb-infras-role",
       "arn:aws:iam::249899229305:role/cognito-jwt-edge-auth-execution-role",
       "arn:aws:iam::249899229305:role/rds-proxy-role"
+
+      # "arn:aws:iam::249899229305:role/github-actions-bootstrap-secret-role",
     ]
   }
 
