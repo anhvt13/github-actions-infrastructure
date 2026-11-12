@@ -63,7 +63,9 @@ locals {
       "rds:DescribeDBProxyTargets",
       "rds:DeregisterDBProxyTargets"
     ]
-    Resource = "arn:aws:rds:ap-southeast-1:249899229305:target-group:*"
+    Resource = [
+      "arn:aws:rds:ap-southeast-1:249899229305:target-group:*"
+    ]
   }
 
   #==========================================
@@ -76,7 +78,10 @@ locals {
       "rds:RegisterDBProxyTargets",
       "rds:DeregisterDBProxyTargets"
     ]
-    Resource = "arn:aws:rds:ap-southeast-1:249899229305:cluster:capstone-aurora-cluster"
+    Resource = [
+      "arn:aws:rds:ap-southeast-1:249899229305:cluster:capstone-cluster",
+      "arn:aws:rds:ap-southeast-1:249899229305:cluster:capstone-dr-cluster"
+    ]
   }
 
   # ===========================
