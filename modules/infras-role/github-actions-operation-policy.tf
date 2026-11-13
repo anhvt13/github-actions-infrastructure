@@ -16,7 +16,9 @@ locals {
     ]
     Resource = [
       "arn:aws:logs:ap-southeast-1:249899229305:log-group::log-stream",
-      "arn:aws:logs:ap-southeast-1:249899229305:log-group:/ecs/capstone-app"
+      "arn:aws:logs:ap-southeast-1:249899229305:log-group:/ecs/capstone-app",
+      "arn:aws:logs:ap-northeast-1:249899229305:log-group::log-stream",
+      "arn:aws:logs:ap-northeast-1:249899229305:log-group:/ecs/capstone-app"
     ]
   }
 
