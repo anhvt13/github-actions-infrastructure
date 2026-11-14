@@ -84,7 +84,7 @@ locals {
     ]
     Resource = [
       "arn:aws:rds:ap-southeast-1:249899229305:cluster:capstone-cluster",
-      "arn:aws:rds:ap-southeast-1:249899229305:cluster:capstone-dr-cluster"
+      "arn:aws:rds:ap-northeast-1:249899229305:cluster:capstone-dr-cluster"
     ]
   }
 
