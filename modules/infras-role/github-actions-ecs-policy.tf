@@ -56,7 +56,10 @@ locals {
       "application-autoscaling:DescribeScalingPolicies",
       "application-autoscaling:DeleteScalingPolicy"
     ]
-    Resource = "arn:aws:application-autoscaling:ap-southeast-1:249899229305:scalable-target/*"
+    Resource = [
+      "arn:aws:application-autoscaling:ap-southeast-1:249899229305:scalable-target/*",
+      "arn:aws:application-autoscaling:ap-northeast-1:249899229305:scalable-target/*"
+    ]
   }
 
   github_actions_service_link_role_statement = {
